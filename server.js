@@ -15,6 +15,12 @@ const PORT = process.env.PORT || 3000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 const CORS_ORIGIN = process.env.CORS_ORIGIN || "*";
 
+// Log every incoming request (method + URL)
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.originalUrl}`);
+  next();
+});
+
 // Enable basic security headers
 app.use(helmet());
 
@@ -136,17 +142,13 @@ app.use("/order", orderRoutes);
 
 // Simple health endpoint to check if server is running
 app.get("/", (req, res) => {
-  res.json({
-    message: "Shopping demo backend is running!",
-    docs: `${BASE_URL}/openapi.json`
-  });
+  res.status(200).send("API is running 🚀");
 });
 
 // 404 handler for unknown routes
 app.use((req, res) => {
   res.status(404).json({
-    success: false,
-    message: "Route not found"
+    error: "Route not found"
   });
 });
 
@@ -161,5 +163,6 @@ app.use((err, req, res, next) => {
 
 // Start server on port 3000
 app.listen(PORT, () => {
-  console.log(`Server started on http://localhost:${PORT}`);
+  console.log(`Server started on port ${PORT}`);
+  console.log(`OpenAPI spec available at ${BASE_URL}/openapi.json`);
 });

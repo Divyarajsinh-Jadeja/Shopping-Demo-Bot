@@ -27,8 +27,7 @@ const createOrder = (req, res) => {
   return res.status(200).json({
     success: true,
     message: "Order created successfully",
-    // For demo purposes, use the product checkout URL as payment_url
-    payment_url: selectedProduct.url
+    payment_url: "https://example.com/payment"
   });
 };
 
