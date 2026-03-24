@@ -34,6 +34,8 @@ const products = [
     price: 29.99,
     rating: 8.7,
     description: "Ergonomic wireless mouse with precise tracking and long battery life.",
+    image_url:
+      "https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=1200&q=80",
     url: "https://example.com/checkout/wireless-mouse"
   },
   {
@@ -43,6 +45,8 @@ const products = [
     rating: 9.1,
     description:
       "Tactile mechanical keyboard with durable switches and customizable RGB lighting.",
+    image_url:
+      "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=1200&q=80",
     url: "https://example.com/checkout/mechanical-keyboard"
   },
   {
@@ -52,6 +56,8 @@ const products = [
     rating: 8.2,
     description:
       "Compact USB-C hub with HDMI, USB-A, and PD charging support for daily use.",
+    image_url:
+      "https://images.unsplash.com/photo-1625723044792-44de16ccb4e9?auto=format&fit=crop&w=1200&q=80",
     url: "https://example.com/checkout/usb-c-hub"
   },
   {
@@ -61,6 +67,8 @@ const products = [
     rating: 8.9,
     description:
       "Over-ear Bluetooth headphones with active noise cancellation and deep bass.",
+    image_url:
+      "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=1200&q=80",
     url: "https://example.com/checkout/bluetooth-headphones"
   },
   {
@@ -70,6 +78,8 @@ const products = [
     rating: 8.4,
     description:
       "Fitness-focused smartwatch with heart-rate tracking, sleep insights, and GPS.",
+    image_url:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80",
     url: "https://example.com/checkout/smart-watch"
   },
   {
@@ -79,6 +89,8 @@ const products = [
     rating: 9.3,
     description:
       "High-speed portable SSD with USB 3.2 support for fast backup and file transfer.",
+    image_url:
+      "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=1200&q=80",
     url: "https://example.com/checkout/portable-ssd"
   },
   {
@@ -88,6 +100,8 @@ const products = [
     rating: 8.6,
     description:
       "Ultra-clear 4K webcam with auto-focus and dual microphones for video meetings.",
+    image_url:
+      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=80",
     url: "https://example.com/checkout/4k-webcam"
   },
   {
@@ -97,6 +111,8 @@ const products = [
     rating: 8.0,
     description:
       "Fast wireless charging pad compatible with popular Android and iOS devices.",
+    image_url:
+      "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=1200&q=80",
     url: "https://example.com/checkout/wireless-charger"
   }
 ];
@@ -106,12 +122,13 @@ const products = [
 const getAllProducts = async (req, res) => {
   const productsWithDynamicImages = await Promise.all(
     products.map(async (product) => {
-      const dynamicImageUrl = getImageUrl(product.title);
-      const imageIsReachable = await isImageReachable(dynamicImageUrl);
+      // Prefer curated real image URL; generate one dynamically if missing
+      const preferredImageUrl = product.image_url || getImageUrl(product.title);
+      const imageIsReachable = await isImageReachable(preferredImageUrl);
 
       return {
         ...product,
-        image_url: imageIsReachable ? dynamicImageUrl : FALLBACK_IMAGE_URL
+        image_url: imageIsReachable ? preferredImageUrl : FALLBACK_IMAGE_URL
       };
     })
   );
