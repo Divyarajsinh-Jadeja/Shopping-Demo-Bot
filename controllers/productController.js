@@ -6,7 +6,7 @@ const products = [
     description: "Ergonomic wireless mouse with smooth tracking and long battery life.",
     price: 29.99,
     // Public product image URL from a real website
-    image:
+    image_url:
       "https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=1200&q=80",
     url: "https://example.com/checkout/wireless-mouse"
   },
@@ -17,7 +17,7 @@ const products = [
       "Tactile mechanical keyboard with durable switches and customizable RGB lighting.",
     price: 79.99,
     // Public product image URL from a real website
-    image:
+    image_url:
       "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=1200&q=80",
     url: "https://example.com/checkout/mechanical-keyboard"
   },
@@ -28,7 +28,7 @@ const products = [
       "Compact USB-C hub with multiple ports for charging, data transfer, and displays.",
     price: 39.99,
     // Public product image URL from a real website
-    image:
+    image_url:
       "https://images.unsplash.com/photo-1625723044792-44de16ccb4e9?auto=format&fit=crop&w=1200&q=80",
     url: "https://example.com/checkout/usb-c-hub"
   }
