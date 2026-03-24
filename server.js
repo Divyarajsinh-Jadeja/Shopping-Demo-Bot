@@ -74,12 +74,22 @@ app.get("/openapi.json", (req, res) => {
                       type: "object",
                       properties: {
                         id: { type: "integer" },
-                        name: { type: "string" },
+                        title: { type: "string" },
                         price: { type: "number" },
+                        rating: { type: "number", minimum: 1, maximum: 10 },
+                        description: { type: "string" },
                         image_url: { type: "string", format: "uri" },
                         url: { type: "string", format: "uri" }
                       },
-                      required: ["id", "name", "price", "image_url", "url"]
+                      required: [
+                        "id",
+                        "title",
+                        "price",
+                        "rating",
+                        "description",
+                        "image_url",
+                        "url"
+                      ]
                     }
                   }
                 }
